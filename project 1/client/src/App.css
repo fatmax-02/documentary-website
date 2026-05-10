@@ -304,10 +304,10 @@ hr{
   justify-content: center;
   align-items: middle;
   flex-direction: column;
-  background-image: url(C:\projectt\client\src\component\na.jpg);
+  background-image: url('./component/na.jpg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size:0cqh;
+  background-size: cover;
 }
 
 .headerContainer {
@@ -539,10 +539,10 @@ span{
 }
 
 .div6 , .div4{
-  background-image: url(C:\projectt\client\src\component\na.jpg);
+  background-image: url('./component/na.jpg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size:0cqh;
+  background-size: cover;
   justify-content: center;
 }
 
@@ -647,7 +647,7 @@ td{
   font-weight: 600;
 }
 body{
-  background: url(C:\projectt\client\src\component\na.jpg);
+  background: url('./component/na.jpg');
   background-size: cover;
 }
 .container{
@@ -795,7 +795,6 @@ header img{
   margin-right: 25%;
 }
 
-/*comments*/
 .comment{
   margin-left: 25%;
   margin-right: 25%;
@@ -807,7 +806,6 @@ header img{
   font-size: 20px;
 }
 
-/*delete users*/
 .tab{
   margin-left: 30%;
   margin-right: 15%;
@@ -819,7 +817,6 @@ header img{
   color: #f6fdff;
 }
 
-/*update user*/
 .h3update{
   color: #f6fdff;
   font-family:Verdana, Geneva, Tahoma, sans-serif;

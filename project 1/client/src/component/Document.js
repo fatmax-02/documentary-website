@@ -11,10 +11,14 @@ import sea from '../component/sea.png';
 import mini from '../component/mini.jpeg';
 import mys from '../component/mys.png';
 
-
 const Document = () => {
     const [comment, setcomment] = useState(""); 
     const [resMsg, setresMsg] = useState(""); 
+    const [selectedCategory, setSelectedCategory] = useState("All Categories");
+    const [selectedQuality, setSelectedQuality] = useState("");
+    const [isFree, setIsFree] = useState(false);
+    const [releaseDate, setReleaseDate] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const newComment = () => { 
         axios 
@@ -27,13 +31,57 @@ const Document = () => {
           .catch((err) => { 
             console.log(err); 
           }); 
-        };
-
+    };
 
   return (
     <div>
         <div><br/><br/>
         <p class="h22">" Here You Find Knowledge "</p>
+        </div>
+
+        <div style={{ backgroundColor: '#f0f0f0', padding: '20px', borderRadius: '10px', margin: '20px' }}>
+          <h3>Filter Documentaries</h3>
+          
+          {/* DropDown */}
+          <select style={{ margin: '10px', padding: '8px', width: '200px' }} onChange={(e) => setSelectedCategory(e.target.value)}>
+            <option>All Categories</option>
+            <option>Nature</option>
+            <option>History</option>
+            <option>Space</option>
+            <option>Crime</option>
+          </select>
+
+          {/* Radio Buttons */}
+          <div style={{ margin: '10px' }}>
+            <label style={{ fontSize: '16px' }}>
+              <input type="radio" name="quality" onChange={() => setSelectedQuality("HD")} /> HD
+            </label>
+            <label style={{ fontSize: '16px', marginLeft: '15px' }}>
+              <input type="radio" name="quality" onChange={() => setSelectedQuality("Full HD")} /> Full HD
+            </label>
+            <label style={{ fontSize: '16px', marginLeft: '15px' }}>
+              <input type="radio" name="quality" onChange={() => setSelectedQuality("4K")} /> 4K
+            </label>
+          </div>
+
+          {/* Checkbox */}
+          <div style={{ margin: '10px' }}>
+            <label style={{ fontSize: '16px' }}>
+              <input type="checkbox" onChange={(e) => setIsFree(e.target.checked)} /> Show only free documentaries
+            </label>
+          </div>
+
+          {/* Date Picker */}
+          <div style={{ margin: '10px' }}>
+            <label style={{ fontSize: '16px' }}>Release Date: </label>
+            <input type="date" style={{ marginLeft: '10px', padding: '8px', width: '200px' }} onChange={(e) => setReleaseDate(e.target.value)} />
+          </div>
+
+          {/* Search Box */}
+          <div style={{ margin: '10px' }}>
+            <input type="text" placeholder="Search documentaries..." style={{ padding: '8px', width: '300px', borderRadius: '20px', border: '1px solid #ccc' }} onChange={(e) => setSearchTerm(e.target.value)} />
+            <button style={{ marginLeft: '10px', padding: '8px 20px', backgroundColor: '#d32a46', color: 'white', border: 'none', borderRadius: '20px' }} onClick={() => alert("Searching for: " + searchTerm)}>Search</button>
+          </div>
         </div>
 
         <div> <br/><br/>

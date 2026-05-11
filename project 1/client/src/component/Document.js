@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import img from '../component/img.png';
 import car from '../component/car.png';
@@ -15,10 +15,26 @@ const Document = () => {
     const [comment, setcomment] = useState(""); 
     const [resMsg, setresMsg] = useState(""); 
     const [selectedCategory, setSelectedCategory] = useState("All Categories");
-    const [selectedQuality, setSelectedQuality] = useState("");
-    const [isFree, setIsFree] = useState(false);
-    const [releaseDate, setReleaseDate] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+
+    // List of documentaries with titles and categories
+    const documentaries = [
+        { id: 1, title: "Superfoods – is healthy eating just hype?", category: "Nature", img: img, link: "https://youtu.be/tRRoYeKztbY" },
+        { id: 2, title: "Legend of Atlantis | Drain the Oceans", category: "History", img: sea, link: "https://youtu.be/ErPsyBUCijM" },
+        { id: 3, title: "Mysteries of the Universe | Space Documentary", category: "Space", img: space, link: "https://youtu.be/egDIqKLt2L4" },
+        { id: 4, title: "The Life of Princess Diana", category: "History", img: dia, link: "https://youtu.be/MkkLOLXLLpY" },
+        { id: 5, title: "MINIMALISM: Official Netflix Documentary", category: "Lifestyle", img: mini, link: "https://youtu.be/J8DGjUv-Vjc" },
+        { id: 6, title: "THE SECRETS OF LUXURY SEDANS", category: "Technology", img: car, link: "https://youtu.be/TWLyRQbvr6o" },
+        { id: 7, title: "WILD COLOMBIA | Animal documentary", category: "Nature", img: anmal, link: "https://youtu.be/opGsoygtcmk" },
+        { id: 8, title: "Serial Killer Documentary", category: "Crime", img: kill, link: "https://youtu.be/vx878uqVzYU" }
+    ];
+
+    // Filter documentaries based on search term and category
+    const filteredDocs = documentaries.filter(doc => {
+        const matchesSearch = doc.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = selectedCategory === "All Categories" || doc.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+    });
 
     const newComment = () => { 
         axios 
@@ -39,93 +55,51 @@ const Document = () => {
         <p class="h22">" Here You Find Knowledge "</p>
         </div>
 
+        {/* Filter Section */}
         <div style={{ backgroundColor: '#f0f0f0', padding: '20px', borderRadius: '10px', margin: '20px' }}>
           <h3>Filter Documentaries</h3>
           
-          {/* DropDown */}
-          <select style={{ margin: '10px', padding: '8px', width: '200px' }} onChange={(e) => setSelectedCategory(e.target.value)}>
+          {/* Search Box */}
+          <div style={{ margin: '10px' }}>
+            <input 
+              type="text" 
+              placeholder="Search documentaries..." 
+              style={{ padding: '8px', width: '300px', borderRadius: '20px', border: '1px solid #ccc' }}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          {/* DropDown Category */}
+          <select 
+            style={{ margin: '10px', padding: '8px', width: '200px' }} 
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
             <option>All Categories</option>
             <option>Nature</option>
             <option>History</option>
             <option>Space</option>
             <option>Crime</option>
+            <option>Technology</option>
+            <option>Lifestyle</option>
           </select>
 
-          {/* Radio Buttons */}
-          <div style={{ margin: '10px' }}>
-            <label style={{ fontSize: '16px' }}>
-              <input type="radio" name="quality" onChange={() => setSelectedQuality("HD")} /> HD
-            </label>
-            <label style={{ fontSize: '16px', marginLeft: '15px' }}>
-              <input type="radio" name="quality" onChange={() => setSelectedQuality("Full HD")} /> Full HD
-            </label>
-            <label style={{ fontSize: '16px', marginLeft: '15px' }}>
-              <input type="radio" name="quality" onChange={() => setSelectedQuality("4K")} /> 4K
-            </label>
-          </div>
-
-          {/* Checkbox */}
-          <div style={{ margin: '10px' }}>
-            <label style={{ fontSize: '16px' }}>
-              <input type="checkbox" onChange={(e) => setIsFree(e.target.checked)} /> Show only free documentaries
-            </label>
-          </div>
-
-          {/* Date Picker */}
-          <div style={{ margin: '10px' }}>
-            <label style={{ fontSize: '16px' }}>Release Date: </label>
-            <input type="date" style={{ marginLeft: '10px', padding: '8px', width: '200px' }} onChange={(e) => setReleaseDate(e.target.value)} />
-          </div>
-
-          {/* Search Box */}
-          <div style={{ margin: '10px' }}>
-            <input type="text" placeholder="Search documentaries..." style={{ padding: '8px', width: '300px', borderRadius: '20px', border: '1px solid #ccc' }} onChange={(e) => setSearchTerm(e.target.value)} />
-            <button style={{ marginLeft: '10px', padding: '8px 20px', backgroundColor: '#d32a46', color: 'white', border: 'none', borderRadius: '20px' }} onClick={() => alert("Searching for: " + searchTerm)}>Search</button>
-          </div>
+          <p style={{ marginTop: '10px', color: '#333' }}>
+            Found {filteredDocs.length} documentaries
+          </p>
         </div>
 
-        <div> <br/><br/>
-        <ul class=" row1">
-            <li class="ss">{'>'}</li>
-
-            <li class=" col1">
-            <a href='https://youtu.be/tRRoYeKztbY?si=RY7DbXE10fCBhSTN' > <img src={img} alt="Superfoods – is healthy eating just hype? | DW Documentary" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/ErPsyBUCijM?si=EyOcO4yAFw8YRBIs' > <img src={sea} alt="Legend of Atlantis (Full Episode) | Drain the Oceans" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/egDIqKLt2L4?si=RLC5KdatJNJ7C5Ld' > <img src={space} alt="Mysteries of the Universe | Space Documentary 2023" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/CEqoCcacR3Y?si=WaETTLXZiQaHpeQq' > <img src={ins} alt="" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/MkkLOLXLLpY?si=h37ImGoVhqHaqekK' > <img src={dia} alt="The Life of Princess Diana" height="150"></img></a>
-            </li>
-        </ul>
-        </div>
-
-        <div> <br/><br/><br/><br/>
-        <ul class=" row1">
-            <li class="ss">{'>'}</li>
-
-            <li class=" col1">
-            <a href='https://youtu.be/J8DGjUv-Vjc?si=Vk3Mo3qvJvBwW6Kd' > <img src={mini} alt="MINIMALISM: Official Netflix Documentary" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/TWLyRQbvr6o?si=CQYMcde2eXks5f8V' > <img src={car} alt="THE SECRETS OF LUXURY SEDANS: How S-Class, Maybach and EQS are made | WELT Documentary" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/opGsoygtcmk?si=CxfFX_gN2T0JH9N4' > <img src={anmal} alt="WILD COLOMBIA | Survival Battles in the Realm of Giants | Animal documentary" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/ncOr6JSTMlw?si=2jZackLnPsT1dZRt' > <img src={mys} alt="" height="150"></img></a>
-            </li>
-            <li class=" col1">
-            <a href='https://youtu.be/vx878uqVzYU?si=aPnpSjit5lxN86WQ' > <img src={kill} alt="The Horrific Acts of Michael Bruce Ross - The Roadside Strangler. | Serial Killer Documentary" height="150"></img></a>
-            </li>
-        </ul>
+        {/* Display Filtered Documentaries */}
+        <div>
+          <ul class="row1">
+            {filteredDocs.map((doc) => (
+              <li key={doc.id} class="col1">
+                <a href={doc.link}>
+                  <img src={doc.img} alt={doc.title} height="150" />
+                  <p style={{ color: '#fff', fontSize: '12px', textAlign: 'center' }}>{doc.title.substring(0, 40)}...</p>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <br/><br/><br/><br/><br/><br/>
@@ -141,11 +115,7 @@ const Document = () => {
             <div> <br/>
                 <h3 class="logh3">{resMsg}</h3>
             </div>
-
         </div>
-        
-
-        <br/><br/><br/><br/><br/>
     </div>
   )
 }

@@ -7,7 +7,7 @@ const Deleteuser = () => {
     const [responseMsg, setresponseMsg] = useState(); 
 
     useEffect(() => { 
-        axios.get("http://localhost:4005/getAllUsers") 
+        axios.get(`${process.env.REACT_APP_API_URL}/getAllUsers`) 
         .then((response) => { 
             console.log(response); 
             setlistOfUsers(response.data.user); 
@@ -19,7 +19,7 @@ const Deleteuser = () => {
     }, []); 
 
     const deluser = async (id) => { 
-        axios.delete(`http://localhost:4005/delete/${id}`) 
+        axios.delete(`${process.env.REACT_APP_API_URL}/delete/${id}`) 
     .then((response) => { 
           setlistOfUsers( 
             listOfUsers.filter((val) => { 

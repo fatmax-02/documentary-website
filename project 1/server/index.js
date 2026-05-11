@@ -3,23 +3,25 @@ import mongoose from "mongoose";
 import cors from "cors"; 
 import userModel from "./models/Users.js";
 import commentModel from "./models/Comment.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express(); 
 app.use(express.json()); 
 app.use(cors()); 
 
-app.listen(4005, () => { 
-  console.log("connected with 4005"); 
+app.listen(process.env.PORT, () => { 
+  console.log("connected with " + process.env.PORT); 
 }); 
 
-const constring = "mongodb+srv://admin:project123@cproject.omqqfyp.mongodb.net/Login?appName=Cproject";
+const constring = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority&appName=Cproject`;
 mongoose.connect(constring)
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.log("MongoDB connection error:", err));
 
 // CREATE - Add new user with validation
 app.post("/adduser", async (req, res) => { 
-  const { username, useremail, password, age } = req.body;
+  const { username, useremail, password, age, agreeToTerms } = req.body;
   
   // Validation
   if (!username || username.length < 3) {
@@ -34,13 +36,16 @@ app.post("/adduser", async (req, res) => {
   if (age && (age < 18 || age > 100)) {
     return res.status(400).send("Age must be between 18 and 100");
   }
+  if (!agreeToTerms) {
+    return res.status(400).send("You must agree to the Terms and Conditions");
+  }
   
   const user = new userModel({ 
     username: username, 
     useremail: useremail, 
     password: password,
     age: age || 0,
-    isActive: true,
+    agreeToTerms: agreeToTerms,
     createdAt: new Date()
   }); 
   await user.save(); 

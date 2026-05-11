@@ -12,8 +12,10 @@ app.listen(4005, () => {
   console.log("connected with 4005"); 
 }); 
 
-const constring = "mongodb+srv://admin:project123@cproject.qajjc.mongodb.net/Login?retryWrites=true&w=majority&appName=Cproject"; 
-mongoose.connect(constring); 
+const constring = "mongodb+srv://admin:project123@cproject.omqqfyp.mongodb.net/Login?appName=Cproject";
+mongoose.connect(constring)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.log("MongoDB connection error:", err));
 
 // CREATE - Add new user with validation
 app.post("/adduser", async (req, res) => { 

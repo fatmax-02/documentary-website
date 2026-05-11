@@ -11,7 +11,7 @@ const Updateuser = () => {
     const [responseMsg, setresponseMsg] = useState();
 
     const updates = () => { 
-        axios.put(`http://localhost:4005/updateuser/${id}`, { 
+        axios.put(`${process.env.REACT_APP_API_URL}/updateuser/${id}`, { 
             username: username, 
             useremail: useremail, 
             password: password, 

@@ -38,7 +38,7 @@ const Document = () => {
 
     const newComment = () => { 
         axios 
-          .post("http://localhost:4005/addcomment", { 
+          .post(`${process.env.REACT_APP_API_URL}/addcomment`, { 
             comment: comment,
           }) 
           .then((res) => { 

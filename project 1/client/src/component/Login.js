@@ -11,7 +11,7 @@ const Login = () => {
 
     const newUser = () => {
         axios
-        .post("http://localhost:4005/adduser", { 
+        .post('${process.env.REACT_APP_API_URL}/adduser', { 
             username: username, 
             useremail: useremail, 
             password: password,

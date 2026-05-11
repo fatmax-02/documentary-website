@@ -6,6 +6,7 @@ const Login = () => {
     const [useremail, setUseremail] = useState("");
     const [password, setPassword] = useState("");
     const [age, setAge] = useState("");
+    const [agreeToTerms, setAgreeToTerms] = useState(false);
     const [resMsg, setresMsg] = useState("");
 
     const newUser = () => {
@@ -14,7 +15,8 @@ const Login = () => {
             username: username, 
             useremail: useremail, 
             password: password,
-            age: age
+            age: age,
+            agreeToTerms: agreeToTerms
         }) 
         .then((res) => { 
             setresMsg(res.data); 
@@ -50,6 +52,12 @@ const Login = () => {
             Age :
             <input type="number" class="form-control input-field" required
                  onChange={(e) => setAge(e.target.value)}></input>
+        </div>
+        <div class="input-box" style={{ marginTop: '5px' }}>
+            <label style={{ fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'normal' }}>
+                <input type="checkbox" onChange={(e) => setAgreeToTerms(e.target.checked)} /> 
+                I agree to the Terms and Conditions
+            </label>
         </div>
       </form>
       <div class="input-box">

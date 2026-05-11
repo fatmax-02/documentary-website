@@ -6,7 +6,7 @@ const Showuser = () => {
     const [countRecords, setcountRecords] = useState(0);
   
   useEffect(() => {
-    axios.get("http://localhost:4005/getAllUsers")
+    axios.get(`${process.env.REACT_APP_API_URL}/getAllUsers`)
       .then((response) => {
         console.log(response);
         setlistOfUsers(response.data.user);

@@ -8,7 +8,7 @@ const Putuser = () => {
     //const [responseMsg, setresponseMsg] = useState();
 
     useEffect(() => { 
-        axios.get('${process.env.REACT_APP_API_URL}/getAllUsers').then((response) => { 
+        axios.get(`${process.env.REACT_APP_API_URL}/getAllUsers`).then((response) => { 
           console.log(response); 
           setListOfUsers(response.data.user); 
           setcountRecords(response.data.count); 

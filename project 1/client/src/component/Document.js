@@ -4,12 +4,12 @@ import img from '../component/img.png';
 import car from '../component/car.png';
 import anmal from '../component/anmal.png';
 import dia from '../component/dia.jpeg';
-import ins from '../component/ins.png';
+//import ins from '../component/ins.png';
 import kill from '../component/kill.png';
 import space from '../component/space.png';
 import sea from '../component/sea.png';
 import mini from '../component/mini.jpeg';
-import mys from '../component/mys.png';
+//import mys from '../component/mys.png';
 
 const Document = () => {
     const [comment, setcomment] = useState(""); 

@@ -12,14 +12,23 @@ const app = express();
 app.use(express.json()); 
 app.use(cors()); 
 
-const constring = process.env.MONGO_URI;
+// Check if MONGO_URI exists
+const mongoURI = process.env.MONGO_URI;
+console.log("MONGO_URI from environment:", mongoURI ? "Found (value starts with: " + mongoURI.substring(0, 20) + "...)" : "NOT FOUND!");
 
-mongoose.connect(constring)
-  .then(() => console.log("MongoDB connected successfully"))
-  .catch((err) => console.log("MongoDB connection error:", err));
+if (!mongoURI) {
+  console.error("ERROR: MONGO_URI environment variable is not set!");
+  process.exit(1);
+}
 
-app.listen(process.env.PORT || 4007, () => { 
-  console.log("connected with " + (process.env.PORT || 4007)); 
+// Connect to MongoDB
+mongoose.connect(mongoURI)
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
+
+const port = process.env.PORT || 4007;
+app.listen(port, '0.0.0.0', () => { 
+  console.log("connected with " + port); 
 }); 
 
 // CREATE - Add new user with validation

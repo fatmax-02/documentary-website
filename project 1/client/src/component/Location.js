@@ -22,7 +22,6 @@ const Location = () => {
       );
       setGeoData(response.data);
 
-      Fix useEffect dependency warning
       console.log("GeoLocation Data:", response.data);
     } catch (error) {
       console.error("Error fetching geolocation data:", error.message);
@@ -56,5 +55,5 @@ const Location = () => {
     </div>
   );
 };
-
+Fix useEffect dependency warning
 export default Location;

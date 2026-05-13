@@ -11,7 +11,7 @@ import Deleteuser from './component/Deleteuser';
 import Putuser from './component/Putuser';
 import Updateuser from './component/Updateuser';
 import Register from './component/Register';
-import About from './component/About.jsx';
+//import About from './component/About.jsx';
 function App() {
   return (
     <div className="App">

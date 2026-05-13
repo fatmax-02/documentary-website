@@ -21,6 +21,8 @@ const Location = () => {
         `https://geo.ipify.org/api/v2/country?apiKey=at_XxJTCgL5XQsfvxiXM8QqZjaH7BAWO&ipAddress=${ip}`
       );
       setGeoData(response.data);
+
+      Fix useEffect dependency warning
       console.log("GeoLocation Data:", response.data);
     } catch (error) {
       console.error("Error fetching geolocation data:", error.message);

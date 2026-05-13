@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 const Location = () => {
@@ -14,7 +14,7 @@ const Location = () => {
     }
   };
 
-  const getGeoLocationData = async () => {
+  const getGeoLocationData = useCallback(async () => {
     if (!ip) return;
     try {
       const response = await axios.get(
@@ -25,7 +25,7 @@ const Location = () => {
     } catch (error) {
       console.error("Error fetching geolocation data:", error.message);
     }
-  };
+  }, [ip]);
 
   useEffect(() => {
     fetchIpAddress();
@@ -35,7 +35,7 @@ const Location = () => {
     if (ip) {
       getGeoLocationData();
     }
-  }, [ip]);
+  }, [ip, getGeoLocationData]);
 
   return (
     <div className="location">
